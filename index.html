@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anatomy of the Back 1: Trapezius & Latissimus Dorsi Mastery Quiz</title>
+    <style>
+        :root {
+            --primary: #2c5282;
+            --secondary: #3182ce;
+            --accent: #63b3ed;
+            --light: #ebf8ff;
+            --dark: #1a365d;
+            --success: #38a169;
+            --warning: #d69e2e;
+            --danger: #e53e3e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(rgba(44, 82, 130, 0.85), rgba(44, 82, 130, 0.9)), 
+                        url('https://i.ibb.co/HjLfn7p/t9duylpwvxf61.jpg') center/cover fixed;
+            color: #2d3748;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .difficulty-badge {
+            display: inline-block;
+            background: var(--danger);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 1rem;
+            margin-top: 15px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .quiz-info {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-item {
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .info-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .info-label {
+            font-size: 0.9rem;
+            color: #4a5568;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .quiz-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .questions-section {
+            flex: 2;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.97);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        
+        .answer-section {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.97);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+            display: none;
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        
+        .answer-section.visible {
+            display: block;
+        }
+        
+        .question {
+            margin-bottom: 35px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #e2e8f0;
+            position: relative;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-left: 5px;
+        }
+        
+        .question-number::before {
+            content: "Q";
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .question-text {
+            margin-bottom: 25px;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            background: linear-gradient(to right, var(--light), #f7fafc);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid var(--accent);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .option {
+            padding: 18px 25px;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.08rem;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .option::before {
+            content: attr(data-letter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 40px;
+            background: #edf2f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--dark);
+            border-right: 2px solid #cbd5e0;
+        }
+        
+        .option-content {
+            margin-left: 45px;
+        }
+        
+        .option:hover {
+            background-color: #f7fafc;
+            border-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .option.selected {
+            background-color: #e6fffa;
+            border-color: var(--secondary);
+            box-shadow: 0 4px 12px rgba(49, 130, 206, 0.15);
+        }
+        
+        .option.correct {
+            background-color: #f0fff4;
+            border-color: var(--success);
+            box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+        }
+        
+        .option.incorrect {
+            background-color: #fff5f5;
+            border-color: var(--danger);
+            box-shadow: 0 4px 12px rgba(229, 62, 62, 0.15);
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 20px;
+        }
+        
+        button {
+            padding: 18px 35px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.15rem;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        button:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            flex: 2;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        
+        .reset-btn {
+            background: linear-gradient(135deg, #ffffff, #f7fafc);
+            color: var(--dark);
+            flex: 1;
+            border: 2px solid #cbd5e0;
+        }
+        
+        .reset-btn:hover {
+            background: white;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .results-section {
+            margin-top: 50px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+            display: none;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        
+        .score-display {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .score-display::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: float 20s linear infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-20px, -20px) rotate(360deg); }
+        }
+        
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            margin: 15px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px 0;
+            gap: 25px;
+        }
+        
+        .stat-box {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            flex: 1;
+            transition: transform 0.3s;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .passed .stat-value {
+            color: var(--success);
+            background: linear-gradient(135deg, var(--success), #48bb78);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .failed .stat-value {
+            color: var(--danger);
+            background: linear-gradient(135deg, var(--danger), #fc8181);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .attempted .stat-value {
+            color: var(--secondary);
+            background: linear-gradient(135deg, var(--secondary), #4299e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .answer-bank {
+            margin-top: 50px;
+        }
+        
+        .answer-item {
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            background: white;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s;
+        }
+        
+        .answer-item:hover {
+            transform: translateY(-2px);
+        }
+        
+        .answer-correct {
+            color: var(--success);
+            font-weight: bold;
+            display: inline-block;
+            padding: 5px 10px;
+            background: #f0fff4;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+        
+        .answer-incorrect {
+            color: var(--danger);
+            font-weight: bold;
+            display: inline-block;
+            padding: 5px 10px;
+            background: #fff5f5;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+        
+        .clinical-note {
+            background: #fffaf0;
+            border-left: 5px solid var(--warning);
+            padding: 18px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-style: italic;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .anatomy-highlight {
+            background: linear-gradient(to right, #e6fffa, #f0fff4);
+            border-left: 5px solid var(--success);
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .support-section {
+            text-align: center;
+            margin-top: 50px;
+            padding: 35px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .support-link {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .support-link:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .share-section {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .share-btn-small {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            min-width: 180px;
+            justify-content: center;
+        }
+        
+        .share-twitter {
+            background: linear-gradient(135deg, #1DA1F2, #0d8bd9);
+            color: white;
+        }
+        
+        .share-facebook {
+            background: linear-gradient(135deg, #4267B2, #365899);
+            color: white;
+        }
+        
+        .share-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+        }
+        
+        .share-copy {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 5px;
+            margin: 25px 0;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        @media (max-width: 1200px) {
+            .quiz-container {
+                flex-direction: column;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .share-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .share-btn-small {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+            }
+            
+            h1 {
+                font-size: 1.7rem;
+            }
+            
+            .score-value {
+                font-size: 2.5rem;
+            }
+            
+            .question-text {
+                font-size: 1.1rem;
+                padding: 15px;
+            }
+            
+            .option {
+                padding: 15px 20px;
+            }
+        }
+        
+        .muscle-icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            vertical-align: middle;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+            position: relative;
+        }
+        
+        .muscle-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Anatomy of the Back 1: Trapezius & Latissimus Dorsi Mastery Quiz</h1>
+            <p class="subtitle">40 Comprehensive and Challenging Questions on Origin, Insertion, Innervation, Blood Supply, Deformities, and Clinical Correlations</p>
+            <div class="difficulty-badge">ADVANCED MASTERY LEVEL</div>
+        </header>
+        
+        <div class="quiz-info">
+            <div class="info-item">
+                <div class="info-value">40</div>
+                <div class="info-label">Comprehensive Questions</div>
+            </div>
+            <div class="info-item">
+                <div class="info-value">Trapezius & Latissimus</div>
+                <div class="info-label">Focus Muscles</div>
+            </div>
+            <div class="info-item">
+                <div class="info-value">Advanced Anatomy</div>
+                <div class="info-label">Difficulty Level</div>
+            </div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress" id="progress-bar" style="width: 0%"></div>
+        </div>
+        
+        <div class="quiz-container">
+            <div class="questions-section" id="questions-section">
+                <!-- Questions will be dynamically inserted here -->
+            </div>
+            
+            <div class="answer-section" id="answer-section">
+                <h2>Comprehensive Answer Bank</h2>
+                <p>Detailed explanations with clinical correlations</p>
+                <div id="answer-bank">
+                    <!-- Answers will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="reset-btn" id="reset-btn">Reset Quiz</button>
+            <button class="submit-btn" id="submit-btn">Submit Answers</button>
+        </div>
+        
+        <div class="results-section" id="results-section">
+            <div class="score-display">
+                <h2>Your Mastery Score</h2>
+                <div class="score-value" id="score-value">0/40</div>
+                <p>Anatomy of the Back 1: Trapezius & Latissimus Dorsi</p>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-box attempted">
+                    <div class="stat-value" id="attempted-value">0</div>
+                    <div class="stat-label">Questions Attempted</div>
+                </div>
+                <div class="stat-box passed">
+                    <div class="stat-value" id="passed-value">0</div>
+                    <div class="stat-label">Questions Passed</div>
+                </div>
+                <div class="stat-box failed">
+                    <div class="stat-value" id="failed-value">0</div>
+                    <div class="stat-label">Questions Failed</div>
+                </div>
+            </div>
+            
+            <div class="share-section">
+                <h3>Share Your Mastery Results</h3>
+                <div class="share-buttons">
+                    <button class="share-btn-small share-twitter" id="share-twitter">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                        </svg>
+                        Twitter
+                    </button>
+                    <button class="share-btn-small share-facebook" id="share-facebook">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                        </svg>
+                        Facebook
+                    </button>
+                    <button class="share-btn-small share-whatsapp" id="share-whatsapp">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12.017 2.047c-2.724 0-5.443 1.042-7.513 3.112-4.163 4.163-4.163 10.92 0 15.083 2.07 2.07 4.789 3.112 7.513 3.112s5.443-1.042 7.513-3.112c4.163-4.163 4.163-10.92 0-15.083-2.07-2.07-4.789-3.112-7.513-3.112zm-3.017 15.953l-1.516-1.516 3.035-3.035-3.035-3.035 1.516-1.516 3.035 3.035 3.035-3.035 1.516 1.516-3.035 3.035 3.035 3.035-1.516 1.516-3.035-3.035-3.035 3.035z"/>
+                        </svg>
+                        WhatsApp
+                    </button>
+                    <button class="share-btn-small share-copy" id="share-copy">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 1h-12c-1.1 0-2 .9-2 2v14h2v-14h12v-2zm3 4h-11c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-14c0-1.1-.9-2-2-2zm0 16h-11v-14h11v14z"/>
+                        </svg>
+                        Copy Results
+                    </button>
+                </div>
+            </div>
+            
+            <div class="answer-bank">
+                <h3>Detailed Anatomical Explanations with Clinical Correlations</h3>
+                <div id="detailed-answers">
+                    <!-- Detailed answers will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="support-section">
+            <h3>Follow Code God for More Advanced Medical Quizzes</h3>
+            <a href="https://www.tiktok.com/@code.god3?_r=1&_d=ZS-91SF7FxgGKu" target="_blank" class="support-link">Follow on TikTok</a>
+        </div>
+    </div>
+
+    <script>
+        // Comprehensive quiz questions for Trapezius and Latissimus Dorsi
+        const quizData = [
+            {
+                question: "The trapezius muscle exhibits a unique dual innervation pattern. Which cranial nerve and spinal nerves provide its motor supply, and what is the embryological basis for this unusual arrangement?",
+                options: [
+                    "Cranial nerve XI (Spinal Accessory) and ventral rami of C3-C4 via cervical plexus, representing branchial arch and somatic mesoderm origins",
+                    "Cranial nerve X (Vagus) and dorsal rami of C2-C5, representing pharyngeal arch and epaxial muscle development",
+                    "Cranial nerve VII (Facial) and ventral rami of C5-C7, representing second branchial arch and hypaxial muscle derivatives",
+                    "Cranial nerve IX (Glossopharyngeal) and dorsal rami of C1-C3, representing third branchial arch and epaxial derivatives"
+                ],
+                correct: 0,
+                explanation: "Trapezius receives motor supply from cranial nerve XI (Spinal Accessory) and proprioceptive fibers from ventral rami of C3-C4. This reflects its dual embryological origin: the cranial part develops from branchial arches (hence CN XI), while the spinal part originates from somatic mesoderm. This arrangement explains why trapezius weakness presents differently from other back muscles - accessory nerve lesions cause shoulder droop and scapular winging, while C3-C4 lesions affect proprioception and fine motor control."
+            },
+            {
+                question: "A patient presents with 'winged scapula' but with medial border prominence rather than typical lateral winging. Which portion of trapezius is likely affected, and what specific functional deficit would you expect?",
+                options: [
+                    "Middle fibers - impaired scapular retraction and rhomboid synergism failure",
+                    "Superior fibers - impaired scapular elevation and upward rotation initiation",
+                    "Inferior fibers - impaired scapular depression and medial rotation of glenoid",
+                    "All trapezius portions - complete scapular dyskinesis with multidirectional instability"
+                ],
+                correct: 2,
+                explanation: "Inferior trapezius weakness causes 'medial border winging' - the scapula rotates upward and laterally, making the medial border prominent. This portion primarily depresses and upwardly rotates the scapula. When weak, patients cannot lower the arm from full abduction smoothly, have difficulty with overhead activities, and exhibit scapular dyskinesis where the inferior angle protrudes posteriorly during arm elevation. This differs from serratus anterior weakness which causes lateral winging."
+            },
+            {
+                question: "During radical neck dissection, the spinal accessory nerve is sacrificed. What specific vascular compromise might occur to the trapezius muscle, and which artery's anastomotic network becomes critical for muscle survival?",
+                options: [
+                    "Compromised transverse cervical artery supply; dorsal scapular artery anastomoses become vital via rhomboid connections",
+                    "Lost occipital artery supply; ascending cervical artery via muscular branches must compensate",
+                    "Interrupted superficial cervical artery; deep cervical artery anastomoses through semispinalis connections",
+                    "Damaged suprascapular artery; thoracoacromial artery via deltoid branches provides collateral"
+                ],
+                correct: 0,
+                explanation: "The transverse cervical artery (branch of thyrocervical trunk) runs with CN XI. When sacrificed, trapezius relies on anastomoses between dorsal scapular artery (branch of subclavian) and the transverse cervical via connections through rhomboids. This 'scapular anastomosis' can sometimes preserve trapezius function but often leads to denervation atrophy despite preserved blood flow. Post-surgical physical therapy must focus on scapular stabilization using rhomboids and levator scapulae compensation."
+            },
+            {
+                question: "A rare congenital anomaly presents as complete absence of latissimus dorsi. Which associated developmental defects would you MOST expect given its embryological origin from the limb bud mesenchyme?",
+                options: [
+                    "Ipsilateral breast hypoplasia and axillary fold absence, with possible Poland Syndrome association",
+                    "Contralateral renal agenesis and vertebral segmentation defects",
+                    "Ipsilateral hand syndactyly and digital ray deficiencies",
+                    "Bilateral cleft lip and cardiac septal defects"
+                ],
+                correct: 0,
+                explanation: "Latissimus dorsi absence is strongly associated with Poland Syndrome (unilateral chest wall hypoplasia, ipsilateral hand anomalies, and breast/nipple abnormalities). The muscle develops from limb bud mesenchyme migrating into the body wall. Its absence suggests disruption of lateral plate mesoderm differentiation during weeks 5-7. Associated findings include absence of pectoralis major, syndactyly, brachydactyly, and ipsilateral rib anomalies. Surgical reconstruction often uses contralateral latissimus flap for chest wall and breast reconstruction."
+            },
+            {
+                question: "The latissimus dorsi has an extensive origin spanning multiple vertebral levels and structures. Which of the following accurately describes its MOST SUPERIOR bony attachment and the clinical significance of this attachment?",
+                options: [
+                    "Spinous process of T7 - serves as the anatomical landmark for muscle splitting approaches to thoracic outlet",
+                    "Inferior angle of scapula - provides dynamic stabilization during throwing motions",
+                    "Spinous process of T12 - marks the transition point between thoracic and lumbar surgical approaches",
+                    "Spinous processes of T7-T12 - but the fascial connection to thoracolumbar fascia is functionally more significant"
+                ],
+                correct: 3,
+                explanation: "While latissimus originates from spinous processes T7-T12, its extensive aponeurotic attachment to thoracolumbar fascia (covering lumbar and sacral spines) is functionally more significant. This fascial connection allows force transmission across the posterior trunk, enabling the muscle to act as a 'posterior corset.' This anatomy is crucial in surgical flaps - the muscle can be harvested with thoracolumbar fascia for extended coverage. The fascial attachments also explain why latissimus contractions can influence lumbar spine posture and contribute to core stability."
+            },
+            {
+                question: "During latissimus dorsi tendon transfer for irreparable rotator cuff tears, which neurovascular structure is MOST at risk when mobilizing the tendon through the axilla to the greater tuberosity?",
+                options: [
+                    "Thoracodorsal nerve and artery - risk of denervation and devascularization if stretched beyond 6-8cm",
+                    "Long thoracic nerve - risk of serratus anterior paralysis causing medial winging",
+                    "Axillary nerve and posterior circumflex humeral artery - risk of deltoid paralysis and humeral head avascular necrosis",
+                    "Medial and lateral pectoral nerves - risk of pectoralis major atrophy and anterior shoulder instability"
+                ],
+                correct: 0,
+                explanation: "The thoracodorsal neurovascular bundle (nerve, artery, vein) enters the latissimus 8-14cm from its insertion. During transfer, the muscle can be safely mobilized only 6-8cm without compromising this pedicle. Excessive tension causes neuropraxia (delayed shoulder adduction recovery) or ischemia (muscle fibrosis). Surgeons must preserve the descending branch of the subscapular artery and vein to maintain collateral flow. Post-operatively, patients must avoid aggressive shoulder abduction for 6 weeks to prevent neurovascular stretch injury."
+            },
+            {
+                question: "A patient exhibits 'reverse action' of trapezius where shoulder girdle elevation occurs during ipsilateral head rotation. Which specific neurological condition involving upper motor neurons could explain this abnormal synkinetic movement pattern?",
+                options: [
+                    "Post-polio syndrome with aberrant reinnervation creating abnormal motor unit recruitment",
+                    "Parkinson's disease with rigidity causing co-contraction of antagonist muscles",
+                    "Syringomyelia affecting decussating fibers in anterior white commissure at C3-C4 level",
+                    "Cerebral palsy with loss of inhibitory interneurons causing mass flexion synergies"
+                ],
+                correct: 0,
+                explanation: "In post-polio syndrome and other conditions with motor neuron loss, aberrant reinnervation can create 'synkinesis' - muscles fire in abnormal patterns. Trapezius normally elevates shoulders but doesn't participate in head rotation. After poliovirus destroys anterior horn cells, surviving motor neurons may reinnervate both trapezius and sternocleidomastoid fibers, creating this synkinetic pattern. This represents peripheral (not central) nervous system reorganization. Similar patterns occur after Bell's palsy with crocodile tears or facial synkinesis."
+            },
+            {
+                question: "The blood supply to trapezius demonstrates a unique 'watershed zone' between two major arterial territories. Where is this zone typically located, and what surgical implication does this have for flap design?",
+                options: [
+                    "Between middle and lower thirds - transverse cervical artery superiority vs dorsal scapular artery inferiorly",
+                    "Between superficial and deep layers - occipital artery superficially vs deep cervical artery deeply",
+                    "At the scapular attachment - suprascapular artery anteriorly vs circumflex scapular artery posteriorly",
+                    "Along the spinal accessory nerve course - ascending pharyngeal artery superiority vs thyrocervical trunk inferiorly"
+                ],
+                correct: 0,
+                explanation: "The watershed zone lies between middle and lower thirds where transverse cervical artery (superior) and dorsal scapular artery (inferior) territories meet. This has critical surgical implications: 1) Lower trapezius flaps based on dorsal scapular artery are more reliable than middle/lower flaps, 2) During radical neck dissection, preserving dorsal scapular artery can prevent trapezius necrosis, 3) Flaps extending across this zone have higher risk of distal necrosis. Doppler ultrasound must identify this zone preoperatively for optimal flap design."
+            },
+            {
+                question: "In congenital muscular torticollis, which portion of trapezius is primarily involved in the pathological contracture, and what associated craniofacial deformity develops due to persistent asymmetric pull during infancy?",
+                options: [
+                    "Sternocleidomastoid portion (often misidentified as trapezius) causing plagiocephaly and facial asymmetry",
+                    "Superior trapezius causing ipsilateral ear elevation and temporal flattening",
+                    "Middle trapezius causing scapular retraction and thoracic scoliosis",
+                    "All trapezius portions equally causing cervical kyphosis and mandibular hypoplasia"
+                ],
+                correct: 1,
+                explanation: "Congenital muscular torticollis primarily affects sternocleidomastoid (not trapezius), but superior trapezius spasm often coexists. Persistent head tilt causes: 1) Ipsilateral occipital flattening, 2) Contralateral frontal bossing, 3) Ipsilateral ear displacement inferiorly and anteriorly, 4) Facial asymmetry with smaller cheek on affected side. This occurs because infant skull bones are malleable. Early stretching (by 6 months) can prevent permanent deformity. Surgical release (usually of SCM) after age 1 may be needed for resistant cases."
+            },
+            {
+                question: "During maximal effort lat pull-down exercise, which direction of humeral movement creates GREATEST EMG activity in latissimus dorsi, and what is the biomechanical explanation based on its line of pull relative to shoulder joint axes?",
+                options: [
+                    "Extension from 180° to 0° abduction - optimal length-tension relationship at mid-range",
+                    "Adduction from 90° abduction to neutral - maximal moment arm when arm is abducted",
+                    "Internal rotation throughout range - mechanical advantage increases as muscle shortens",
+                    "Combined extension, adduction, and internal rotation - multiplanar movement engages all fibers"
+                ],
+                correct: 1,
+                explanation: "Latissimus shows peak EMG during adduction from 90° abduction. Biomechanically: 1) At 90° abduction, latissimus has maximal moment arm (greatest perpendicular distance from rotation axis), 2) Muscle fibers are near optimal length for force generation, 3) The line of pull is almost perpendicular to humerus, maximizing rotational force. During extension, other extensors (teres major, posterior deltoid) dominate. During internal rotation, subscapularis is primary. Understanding this guides rehabilitation: adduction exercises best strengthen latissimus post-injury."
+            },
+            {
+                question: "A patient with neurofibromatosis type 1 develops a massive plexiform neurofibroma involving the brachial plexus. Which specific deformity of latissimus dorsi might develop due to infiltration, and what functional consequence would be most disabling?",
+                options: [
+                    "Pseudohypertrophy with increased bulk but decreased strength - most disabling for overhead activities",
+                    "Fibrotic contracture limiting shoulder abduction - most disabling for personal hygiene tasks",
+                    "Progressive fatty infiltration visible on MRI - most disabling for respiratory function during sleep",
+                    "Asymmetric atrophy with fasciculations - most disabling for wheelchair propulsion"
+                ],
+                correct: 1,
+                explanation: "Plexiform neurofibromas can infiltrate latissimus, causing fibrotic contracture that limits shoulder abduction. This is most disabling for: 1) Personal hygiene (washing axilla, applying deodorant), 2) Dressing, 3) Reaching overhead shelves. The tumor's slow growth allows gradual adaptation, but sudden growth spurts can cause severe functional loss. Surgical debulking is challenging due to vascular entanglement. Radiation may accelerate malignant transformation to MPNST. Physical therapy focuses on maintaining range and teaching compensatory strategies."
+            },
+            {
+                question: "The trapezius muscle demonstrates regional functional specialization. Which portion is primarily responsible for upward rotation of scapula during initial 30° of shoulder abduction, and what is the kinesiological mechanism?",
+                options: [
+                    "Superior fibers contracting with inferior fibers - force couple creating rotation moment",
+                    "Middle fibers contracting unilaterally - direct pull on scapular spine",
+                    "Inferior fibers contracting eccentrically - controlled lowering creates upward tilt",
+                    "All portions contracting synchronously - uniform tension distribution across insertion"
+                ],
+                correct: 0,
+                explanation: "Upward rotation is accomplished by a force couple: superior trapezius (with levator scapulae) elevates acromion while inferior trapezius depresses medial scapula. This creates a rotational moment around the scapular center of rotation near the base of spine. This coordinated action: 1) Positions glenoid optimally for humeral head, 2) Prevents impingement, 3) Maintains length-tension relationships of rotator cuff. Dysfunction (common in shoulder impingement) causes abnormal scapulohumeral rhythm with early shrugging or winging."
+            },
+            {
+                question: "During harvesting of extended latissimus dorsi musculocutaneous flap for breast reconstruction, which anatomical structure must be carefully preserved to maintain abdominal wall integrity and prevent postoperative herniation?",
+                options: [
+                    "Anterior layer of thoracolumbar fascia and its continuity with external oblique aponeurosis",
+                    "Posterior inferior serratus attachments and their continuity with intercostal membranes",
+                    "Lateral raphe connecting latissimus to iliac crest via gluteal fascia",
+                    "Medial attachments to spinous processes and supraspinous ligaments"
+                ],
+                correct: 0,
+                explanation: "The anterior layer of thoracolumbar fascia fuses with external oblique aponeurosis laterally. During extended latissimus harvest (including fat over iliac crest), this layer must be preserved to prevent: 1) Lumbar hernias (through triangle of Petit), 2) Abdominal wall weakness, 3) Contour deformities. The fascia provides posterior tension band effect. If compromised, surgeons should perform primary repair or use mesh. Postoperatively, patients must avoid heavy lifting for 3 months to allow fascial healing."
+            },
+            {
+                question: "A rare anatomical variant presents where latissimus dorsi has an additional fleshy slip inserting into the intertubercular groove medial to pectoralis major. What embryological error explains this, and what clinical symptom might this variant cause?",
+                options: [
+                    "Failure of mesenchymal condensation segmentation - may cause snapping shoulder during internal rotation",
+                    "Abnormal migration of limb bud mesenchyme - may compress axillary vessels in certain positions",
+                    "Persistence of embryonic muscle anlage - may limit external rotation mimicking frozen shoulder",
+                    "All of the above are possible explanations and clinical manifestations"
+                ],
+                correct: 3,
+                explanation: "This variant (axillary arch of Langer) represents persistent embryonic muscle tissue that normally regresses. It can: 1) Cause snapping when cord passes over humeral head during rotation, 2) Compress axillary vein causing positional edema (Paget-Schroetter variant), 3) Limit external rotation mimicking adhesive capsulitis, 4) Be mistaken for tumor on imaging. Found in 2-7% population, it's important for axillary surgery (lymph node dissection) and may need division if symptomatic. Arises from latissimus near its insertion, crosses axilla anterior to neurovascular bundle."
+            },
+            {
+                question: "The trapezius muscle has a unique relationship with the cervical lymph node levels. During modified radical neck dissection (preserving spinal accessory nerve), which lymph node level is MOST technically challenging to dissect without denervating trapezius?",
+                options: [
+                    "Level V (posterior triangle) - nerve runs superficially through this level",
+                    "Level II (upper jugular) - nerve enters sternocleidomastoid here",
+                    "Level IV (lower jugular) - nerve gives off branches to trapezius here",
+                    "Level III (middle jugular) - nerve is deepest and hardest to identify here"
+                ],
+                correct: 0,
+                explanation: "Level V (posterior triangle) contains CN XI as it emerges from posterior border of SCM to enter anterior border of trapezius. The nerve: 1) Lies within investing fascia but superficial to prevertebral fascia, 2) Has variable course (3-5cm above clavicle), 3) May have multiple branches entering trapezius at different points. Dissection requires: opening fascia parallel to nerve, gentle retraction, avoiding thermal injury from electrocautery. Even with preservation, 30-50% develop temporary neuropraxia causing shoulder dysfunction. Post-op EMG can differentiate neuropraxia from axonotmesis."
+            },
+            {
+                question: "In patients with facioscapulohumeral muscular dystrophy (FSHD), which specific pattern of trapezius involvement is characteristic, and what genetic mechanism underlies this selective vulnerability?",
+                options: [
+                    "Sparing of upper trapezius with severe lower trapezius atrophy - due to DUX4 toxicity affecting type I fibers predominantly",
+                    "Early involvement of middle trapezius with relative sparing of SCM - due to chromatin relaxation affecting specific muscle groups",
+                    "Asymmetric involvement with moth-eaten appearance on MRI - due to somatic mosaicism of D4Z4 contraction",
+                    "All portions affected equally but with fascial sparing allowing some function - due to extracellular matrix gene involvement"
+                ],
+                correct: 0,
+                explanation: "FSHD uniquely spares upper trapezius while severely affecting lower trapezius. This is because: 1) DUX4 expression toxicity preferentially affects muscles with specific fiber type composition, 2) Lower trapezius has higher proportion of type I fibers vulnerable to DUX4, 3) Genetic mechanism involves chromatin relaxation of D4Z4 repeat on chromosome 4q35. This pattern causes characteristic scapular winging (inferior angle prominence) different from other neuromuscular diseases. Upper trapezius sparing allows some shoulder elevation, creating diagnostic clue."
+            },
+            {
+                question: "During thoracodorsal artery perforator (TAP) flap harvest for breast reconstruction, which intramuscular neural structure must be meticulously dissected to preserve latissimus function while obtaining adequate pedicle length?",
+                options: [
+                    "Medial branch of thoracodorsal nerve running with descending vascular branch",
+                    "Lateral branch of thoracodorsal nerve accompanying transverse vascular branch",
+                    "Communicating branch to long thoracic nerve near serratus anastomosis",
+                    "Motor entry point 8-14cm from insertion where nerve divides into segments"
+                ],
+                correct: 0,
+                explanation: "The medial branch of thoracodorsal nerve runs with the descending branch of thoracodorsal artery (the preferred pedicle for TAP flaps). To preserve latissimus function: 1) Identify nerve before artery division, 2) Trace medial branch away from vascular pedicle, 3) Use nerve stimulator to confirm functional branches, 4) Consider split muscle technique preserving lateral nerve branch. Even with nerve preservation, some denervation occurs due to intramuscular dissection. Postoperative EMG studies show partial reinnervation over 6-12 months via collateral sprouting."
+            },
+            {
+                question: "The trapezius muscle demonstrates unique histochemical properties. Which fiber type predominates in its different portions, and how does this relate to its postural vs phasic function?",
+                options: [
+                    "Upper: Type I (slow oxidative) for sustained posture; Lower: Type II (fast glycolytic) for forceful depression",
+                    "All portions: Mixed Type I/II with regional variation based on biomechanical demands",
+                    "Superficial: Type II for quick movements; Deep: Type I for proprioception and fine control",
+                    "Middle: Type IIa (fast oxidative) for sustained retraction; Outer edges: Type IIb for quick adjustments"
+                ],
+                correct: 1,
+                explanation: "Trapezius has heterogeneous fiber composition: Upper portion: 55% Type I, 45% Type II (maintains head position against gravity). Middle: 60% Type I, 40% Type II (sustains scapular retraction). Lower: 50% Type I, 50% Type II (balances postural and phasic demands). This variation explains: 1) Susceptibility to fatigue in different portions, 2) Response to training (upper trapezius hypertrophies with weight training), 3) Pathological changes in neck pain (Type I fiber atrophy, Type II fiber hypertrophy). Fiber typing helps differentiate neurogenic from myopathic conditions affecting trapezius."
+            },
+            {
+                question: "A patient with history of poliomyelitis presents with severe scoliosis. Which specific imbalance between trapezius and latissimus dorsi contributes MOST to progressive thoracic curve development?",
+                options: [
+                    "Asymmetric trapezius weakness causing rotational pelvic tilt and compensatory lumbar curve",
+                    "Unilateral latissimus overactivity pulling rib cage downward on convex side",
+                    "Combined weakness of both muscles on convex side allowing unopposed paraspinal muscle pull",
+                    "Paradoxical strengthening of contralateral muscles creating windlass effect on vertebrae"
+                ],
+                correct: 1,
+                explanation: "In polio scoliosis, unilateral latissimus overactivity (due to spasticity or compensation) pulls the rib cage downward on the convex side, while trapezius weakness on concave side fails to provide counterbalance. This creates: 1) Thoracic rotation toward convexity, 2) Rib hump on convex side, 3) Progressive curve during growth spurts. Treatment may include: botulinum toxin to overactive latissimus, strengthening of weak trapezius, bracing, or fusion. The imbalance exemplifies 'tenodesis effect' where muscle tightness rather than weakness drives deformity."
+            },
+            {
+                question: "During radical mastectomy with latissimus dorsi flap reconstruction, which lymphatic drainage pathway becomes particularly important to prevent seroma formation in the donor site?",
+                options: [
+                    "Lymphatic vessels accompanying thoracodorsal artery draining to axillary nodes",
+                    "Cutaneous lymphatics draining posteriorly to subscapular nodal group",
+                    "Lymphatic anastomoses with serratus anterior draining to intercostal nodes",
+                    "All pathways are equally important and must be preserved or ligated carefully"
+                ],
+                correct: 0,
+                explanation: "Lymphatics accompanying thoracodorsal vessels are major drainage route from latissimus bed. During flap harvest: 1) These are inevitably divided, 2) Lymph leaks accumulate in dead space, 3) Seroma rates reach 30-50%. Prevention strategies: 1) Meticulous ligation of visible lymphatics, 2) Quilting sutures to obliterate dead space, 3) Fibrin sealant application, 4) Prolonged drainage (2-4 weeks). Chronic seromas may require sclerotherapy or capsulectomy. Understanding this anatomy explains why latissimus donor sites have higher seroma rates than other flaps."
+            },
+            {
+                question: "The trapezius muscle has a complex fascial relationship with surrounding structures. Which specific fascial layer must be incised during posterior approach to cervical spine to access the nuchal ligament without denervating trapezius?",
+                options: [
+                    "Superficial layer of cervical fascia just deep to platysma",
+                    "Investing layer of deep cervical fascia splitting to envelope trapezius",
+                    "Prevertebral fascia overlying semispinalis capitis",
+                    "Alar fascia separating retropharyngeal from danger space"
+                ],
+                correct: 1,
+                explanation: "The investing layer of deep cervical fascia splits to envelope trapezius (superficially) and SCM (deep). For posterior cervical approach: 1) Incise midline through nuchal ligament, 2) Develop plane between trapezius fascial sleeves, 3) Retract muscle laterally without stripping from spinous processes, 4) Preserve segmental nerve supply from dorsal rami. This 'internervous plane' approach minimizes denervation. Deep dissection then involves splitting semispinalis in midline. Preserving trapezius attachment maintains proprioception and reduces postoperative neck pain."
+            },
+            {
+                question: "A rare congenital deformity presents with latissimus dorsi inserting into the scapula instead of humerus. Which embryonic developmental process was disrupted, and what functional adaptation would you expect in shoulder mechanics?",
+                options: [
+                    "Failed migration of muscle precursor cells - compensated by teres major hypertrophy for internal rotation",
+                    "Abnormal apoptosis of intervening mesenchyme - increased rhomboid activity for scapular stability",
+                    "Persistence of embryonic connective tissue bridge - enhanced scapulohumeral rhythm during abduction",
+                    "All are possible explanations with varying compensatory patterns"
+                ],
+                correct: 0,
+                explanation: "This variant represents failed migration of latissimus precursor cells from limb bud mesenchyme to humerus. Functionally: 1) Teres major hypertrophies to provide internal rotation, 2) Pectoralis major may develop accessory slips, 3) Scapular control may improve (since latissimus now acts directly on scapula), 4) Shoulder adduction strength decreases. This anomaly is often asymptomatic but discovered incidentally during shoulder surgery or imaging. Associated anomalies may include rib defects or vertebral segmentation errors. Genetic counseling may be indicated if syndrome is suspected."
+            },
+            {
+                question: "In patients with spinal accessory nerve palsy, which specific movement demonstrates the 'trapezius pinch test' positivity, and what is the pathophysiological basis for this finding?",
+                options: [
+                    "Inability to shrug shoulder against resistance - loss of superior trapezius function",
+                    "Winging when pushing against wall with arm at 90° - loss of middle trapezius scapular stabilization",
+                    "Inability to overhead press - loss of force couple for upward rotation",
+                    "All of the above depending on which trapezius portion is most affected"
+                ],
+                correct: 1,
+                explanation: "The trapezius pinch test: patient pushes against wall with arm forward flexed 90°, elbow extended. Positive if medial scapular border wings (lifts off thorax). This tests middle trapezius which retracts scapula against serratus anterior protraction. Without trapezius, unopposed serratus protracts scapula. This differs from serratus weakness (lateral winging) or rhomboid weakness (medial border prominence at rest). The test localizes to middle trapezius specifically. Rehabilitation focuses on strengthening rhomboids and levator scapulae as synergists."
+            },
+            {
+                question: "The latissimus dorsi muscle has extensive fascial connections. Which specific fascial continuity allows it to influence contralateral pelvic rotation during gait, and what is the clinical relevance in low back pain patients?",
+                options: [
+                    "Thoracolumbar fascia connections to contralateral gluteus maximus via posterior layer",
+                    "Superficial fascia connections to contralateral external oblique via subcutaneous tissue",
+                    "Deep fascia connections to erector spinae aponeurosis crossing midline",
+                    "All contribute to force transmission across the posterior functional line"
+                ],
+                correct: 0,
+                explanation: "Latissimus connects via thoracolumbar fascia to contralateral gluteus maximus, forming the 'posterior functional line.' During gait: right latissimus contracts with left gluteus to stabilize pelvis. Dysfunction contributes to: 1) Sacroiliac joint pain, 2) Lumbar rotation strain, 3) Altered gait mechanics. In low back pain, latissimus often becomes hypertonic, creating pelvic torsion. Treatment: release latissimus trigger points, stretch thoracolumbar fascia, retrain gait pattern. This anatomy explains why shoulder and hip pathologies often coexist."
+            },
+            {
+                question: "During surgical treatment of Sprengel's deformity (congenital high scapula), which portion of trapezius typically requires Z-lengthening to allow scapular descent without causing neuropraxia?",
+                options: [
+                    "Superior fibers inserting on clavicle and acromion",
+                    "Middle fibers inserting on scapular spine",
+                    "Inferior fibers inserting on medial scapula",
+                    "All portions require lengthening for adequate descent"
+                ],
+                correct: 0,
+                explanation: "Superior trapezius is the primary tether preventing scapular descent in Sprengel's deformity. Surgical correction (Woodward procedure): 1) Release trapezius origin from spinous processes, 2) Descend scapula, 3) Z-lengthen superior trapezius if tight, 4) Reattach trapezius lower on spine. Lengthening must preserve spinal accessory nerve branches entering muscle. Postoperative: shoulder immobilized in depression for 3 weeks, then gradual range of motion. Failure to adequately lengthen trapezius leads to recurrence. Associated anomalies (omovertebral bone, Klippel-Feil) must be addressed."
+            },
+            {
+                question: "A patient with C6 tetraplegia undergoes latissimus dorsi to triceps transfer for elbow extension. Which specific neurovascular consideration is MOST critical for successful reinnervation and functional outcome?",
+                options: [
+                    "Preserving thoracodorsal nerve for direct neurotization of radial nerve branches",
+                    "Using intercostal nerve transfer rather than direct muscle stimulation",
+                    "Ensuring muscle is transferred at resting length with adequate vascular supply",
+                    "Suturing tendon under maximal tension to overcome spasticity"
+                ],
+                correct: 2,
+                explanation: "For latissimus to triceps transfer in tetraplegia: 1) Muscle must be transferred at resting length (marked before harvest), 2) Thoracodorsal vessels must be preserved for viability, 3) Nerve supply remains intact (thoracodorsal nerve), 4) Tendon is woven into triceps under physiological tension. Critical: if muscle is too tight, it cannot generate force; if too loose, cannot initiate extension. Postoperative: elbow immobilized in extension 3-4 weeks, then gradual passive/active motion. Success depends on preoperative muscle strength (M4 minimum) and patient motivation for intensive therapy."
+            },
+            {
+                question: "The trapezius muscle exhibits a unique response to botulinum toxin injections for cervical dystonia. Which portion shows greatest clinical improvement, and what is the neurophysiological explanation based on motor endplate distribution?",
+                options: [
+                    "Upper trapezius - has highest density of endplates in band-like pattern",
+                    "Middle trapezius - endplates concentrated near vertebral attachment",
+                    "Lower trapezius - diffuse endplate distribution throughout muscle belly",
+                    "All portions respond equally as toxin diffuses through fascial planes"
+                ],
+                correct: 0,
+                explanation: "Upper trapezius responds best to botulinum toxin because: 1) High endplate density in a band 2-3cm wide running obliquely, 2) Superficial location allows accurate injection, 3) Hyperactivity in cervical dystonia often involves this portion. Dosage: 50-100 units per side, injected under EMG guidance. Effects: reduce pain, improve head position, decrease muscle bulk. Risks: excessive weakness causing shoulder droop, dysphagia if diffuses to strap muscles. Understanding endplate distribution maximizes efficacy while minimizing side effects."
+            },
+            {
+                question: "In patients with massive rotator cuff tears, which specific maneuver best isolates latissimus dorsi function to assess its suitability for tendon transfer, and what is the optimal strength grade required?",
+                options: [
+                    "Shoulder extension with arm adducted against resistance - requires M4 strength",
+                    "Internal rotation with arm at side - requires M3+ strength",
+                    "Adduction from 90° abduction - requires M5 strength for optimal outcome",
+                    "Combined extension, adduction, internal rotation - requires at least M4 strength"
+                ],
+                correct: 3,
+                explanation: "Latissimus function is best assessed by having patient perform combined extension, adduction, and internal rotation against resistance (the 'bear hug' test). Minimum M4 strength (against moderate resistance) is required for successful transfer. Additional assessments: 1) Muscle bulk (atrophy suggests denervation), 2) Flexibility (contracture limits transfer), 3) Skin condition (previous surgery may compromise). EMG may confirm intact thoracodorsal nerve. Patients with M3 strength may still be candidates if other factors favorable. Post-transfer, 70-80% achieve active elevation above 90°."
+            },
+            {
+                question: "The trapezius muscle has a complex relationship with the thoracic outlet. During transaxillary first rib resection for thoracic outlet syndrome, which specific trapezius function might be compromised if the long thoracic nerve is injured, and why?",
+                options: [
+                    "Scapular upward rotation - trapezius works with serratus anterior in force couple",
+                    "Scapular retraction - trapezius and rhomboids share fascial connections",
+                    "Shoulder elevation - trapezius and levator scapulae are synergists",
+                    "All functions may be affected due to overlapping innervation patterns"
+                ],
+                correct: 0,
+                explanation: "Long thoracic nerve injury paralyzes serratus anterior. Since trapezius and serratus work as a force couple for upward rotation, trapezius function is compromised despite being neurologically intact. The force couple fails because: 1) Serratus normally protracts and upwardly rotates, 2) Trapezius alone cannot achieve full upward rotation, 3) Compensatory movements (shoulder hiking) develop. This illustrates how muscle function depends on synergistic relationships. Treatment: serratus palsy may require tendon transfer (pectoralis minor to scapula) to restore force couple."
+            },
+            {
+                question: "A rare vascular anomaly presents where the transverse cervical artery arises directly from the subclavian artery but passes ANTERIOR to the scalene triangle. What surgical risk does this pose during neck dissection, and how can it be avoided?",
+                options: [
+                    "Accidental division causing trapezius necrosis - identified by preoperative CTA",
+                    "Compression causing positional ischemia - requires intraoperative Doppler",
+                    "Mistaken for thyrocervical trunk leading to excessive bleeding - careful dissection needed",
+                    "All are significant risks requiring altered surgical approach"
+                ],
+                correct: 3,
+                explanation: "This anomalous transverse cervical artery (10-15% of population) poses multiple risks: 1) If divided, trapezius may necrose despite dorsal scapular artery, 2) Compression between scalenes may cause positional arm symptoms mimicking TOS, 3) May be mistaken for other vessels during dissection. Prevention: 1) Preoperative CTA to identify anomaly, 2) Careful dissection in supraclavicular fossa, 3) Preserve when possible, 4) If divided, ensure dorsal scapular artery is intact. This anatomy highlights importance of vascular variations in neck surgery."
+            },
+            {
+                question: "The latissimus dorsi muscle demonstrates regional functional activation during different breathing maneuvers. Which portion is most active during forced expiration/cough, and what is the biomechanical mechanism?",
+                options: [
+                    "Costal attachments - compress lower rib cage increasing intra-abdominal pressure",
+                    "Vertebral attachments - extend thoracic spine facilitating diaphragmatic descent",
+                    "Scapular attachments - stabilize shoulder girdle for accessory muscle use",
+                    "All portions contribute equally to generation of expiratory force"
+                ],
+                correct: 0,
+                explanation: "Latissimus contributes to forced expiration via its costal attachments: 1) Contracts to depress and compress lower ribs, 2) Increases intra-abdominal pressure, 3) Assists in cough generation. This function is clinically relevant in: COPD (latissimus hypertrophy as compensatory), spinal cord injury (strengthening improves cough efficacy), postoperative pulmonary care. Rehabilitation includes 'latissimus cough assist' training. In neuromuscular disease, latissimus weakness contributes to respiratory failure. Monitoring latissimus strength helps predict respiratory decline."
+            },
+            {
+                question: "During surgical treatment of scapular winging due to long thoracic nerve palsy, which specific latissimus dorsi transfer technique provides best biomechanical advantage for scapular stabilization?",
+                options: [
+                    "Transfer to inferior angle with fascia lata extension - provides depression and medial rotation",
+                    "Split transfer to medial border at two points - balanced control of entire scapula",
+                    "Transfer to lateral border with teres major - enhances external rotation control",
+                    "All techniques have similar outcomes when combined with rhomboid advancement"
+                ],
+                correct: 0,
+                explanation: "For scapular winging: latissimus (with teres major) transferred to inferior angle with fascia lata extension provides: 1) Depression (counteracts upward rotation), 2) Medial rotation (reduces winging), 3) Posterior tilt (improves acromial clearance). The fascia lata extends reach to medial border. Biomechanically, this creates a new force couple with trapezius. Success requires: intact thoracodorsal nerve, adequate muscle strength, proper tensioning. Postoperative: shoulder immobilized 6 weeks, then gradual active motion. 80-90% achieve improved function and cosmesis."
+            },
+            {
+                question: "The trapezius muscle has a unique response to whiplash injury. Which specific pathophysiological change is most characteristic in chronic whiplash-associated disorder, and what treatment approach targets this change?",
+                options: [
+                    "Type I fiber atrophy with Type II hypertrophy - targeted with low-load endurance training",
+                    "Motor endplate proliferation with increased acetylcholine receptors - treated with botulinum toxin",
+                    "Fatty infiltration visible on MRI - addressed with nutritional interventions and metabolic agents",
+                    "All occur and require multimodal treatment addressing each component"
+                ],
+                correct: 3,
+                explanation: "Chronic whiplash shows: 1) Type I fiber atrophy (disuse), 2) Type II fiber hypertrophy (guarding), 3) Endplate changes (increased ACh sensitivity), 4) Fatty infiltration (metabolic shift). Treatment must address all: 1) Low-load endurance training for Type I fibers, 2) Relaxation techniques for Type II overactivity, 3) Botulinum toxin if endplate hypersensitivity, 4) Metabolic support (coenzyme Q10, carnitine). This comprehensive approach yields better outcomes than single modality. Understanding these changes explains why whiplash symptoms persist beyond tissue healing time."
+            },
+            {
+                question: "In patients with metastatic breast cancer to spine, which specific trapezius function test provides earliest detection of spinal accessory nerve involvement by tumor at the jugular foramen?",
+                options: [
+                    "Shoulder shrug against resistance - earliest sign due to upper trapezius weakness",
+                    "Scapular retraction strength - middle trapezius affected first in most cases",
+                    "Arm elevation above 90° - demonstrates loss of upward rotation force couple",
+                    "All tests are equally sensitive for early nerve involvement"
+                ],
+                correct: 0,
+                explanation: "Shoulder shrug (upper trapezius) is earliest affected because: 1) Upper fibers have highest innervation density, 2) CN XI fibers to upper trapezius are most superficial at jugular foramen, 3) Small tumors compress these fibers first. Testing: patient shrugs against resistance, examiner compares sides. Early sign: subtle asymmetry or fatigue. Later: winging appears. This test is crucial in head/neck cancer surveillance. If positive, MRI of skull base is indicated. Early detection allows nerve-sparing resection or radiation before irreversible damage."
+            },
+            {
+                question: "The latissimus dorsi muscle exhibits gender dimorphism in its response to exercise. Which specific adaptation is more pronounced in females compared to males after resistance training, and what hormonal mechanism underlies this difference?",
+                options: [
+                    "Greater increase in muscular endurance - due to estrogen's effect on mitochondrial biogenesis",
+                    "Earlier hypertrophy response - due to lower androgen receptor density",
+                    "Improved flexibility maintenance - due to collagen organization under estrogen influence",
+                    "All adaptations show gender differences mediated by sex hormone receptors"
+                ],
+                correct: 0,
+                explanation: "Females show greater endurance adaptation in latissimus due to: 1) Estrogen enhances mitochondrial biogenesis via PGC-1α, 2) Higher proportion of Type I fibers at baseline, 3) Different collagen cross-linking maintains elasticity. This has implications for: 1) Training program design (females benefit from higher volume, males from higher intensity), 2) Rehabilitation (females recover endurance faster), 3) Surgical planning (female latissimus may have better perfusion). Understanding these differences optimizes outcomes in sports medicine and reconstructive surgery."
+            },
+            {
+                question: "During endoscopic latissimus dorsi harvest for minimally invasive reconstruction, which anatomical landmark is MOST reliable for identifying the neurovascular hilum, and what distance relationship does it have to consistent surgical planning?",
+                options: [
+                    "Inferior angle of scapula - hilum lies 2-4cm inferior and medial to this point",
+                    "Posterior axillary fold - hilum located 8-10cm from axillary artery bifurcation",
+                    "Tip of scapular spine - hilum found along line connecting this to iliac crest",
+                    "All landmarks are equally reliable when used in combination with intraoperative Doppler"
+                ],
+                correct: 0,
+                explanation: "The inferior scapular angle is most consistent landmark: 1) Hilum lies 2-4cm inferomedial to it, 2) This relationship is constant despite body habitus, 3) Easily palpated even in obese patients. Endoscopic technique: 1) Identify scapular angle, 2) Make access incision 3cm inferomedial, 3) Use balloon dissector to create plane, 4) Visualize thoracodorsal pedicle. This approach reduces seroma rates, improves cosmesis, decreases pain. Understanding this landmark is crucial for safe endoscopic harvest, especially in breast reconstruction where visualization is limited."
+            },
+            {
+                question: "A patient with neuropathic pain syndrome develops severe allodynia over the trapezius muscle. Which specific spinal cord mechanism involving wide dynamic range neurons explains the referral pattern to occiput and temple?",
+                options: [
+                    "Convergence of cervical dorsal horn neurons receiving C2-C4 and trigeminal afferents",
+                    "Central sensitization with expansion of receptive fields into adjacent dermatomes",
+                    "Sympathetically maintained pain with vasomotor changes in cutaneous territories",
+                    "All mechanisms contribute to the complex regional pain pattern"
+                ],
+                correct: 0,
+                explanation: "Trapezius pain refers to head because: 1) C2-C4 dorsal roots innervate trapezius, 2) These converge with trigeminal (V1/V2) neurons in cervical/trigeminal nucleus, 3) Brain misinterprets trapezius input as head pain. Treatment: 1) Address trapezius trigger points, 2) Cervical facet injections (C2-C4), 3) Occipital nerve blocks, 4) Tricyclic antidepressants for central sensitization. Understanding this convergence explains why trapezius dysfunction causes headaches, and why treating trapezius often relieves 'tension headaches' more effectively than head-focused treatments."
+            },
+            {
+                question: "The latissimus dorsi muscle has a unique role in swimming biomechanics. During which specific phase of freestyle stroke does it show peak EMG activity, and what is the kinesiological explanation based on shoulder position and force generation requirements?",
+                options: [
+                    "Early pull-through phase - shoulder in combined extension, adduction, internal rotation",
+                    "Late recovery phase - preparing for entry with eccentric control",
+                    "Mid pull-through - maximum propulsive force generation",
+                    "All phases show similar activation as it works continuously through stroke cycle"
+                ],
+                correct: 0,
+                explanation: "Latissimus peaks during early pull-through when: 1) Shoulder is in flexion/abduction/external rotation (entry), 2) Muscle lengthened for optimal force generation, 3) Begins powerful extension/adduction/internal rotation. This generates 70% of propulsion. Training implications: 1) Dryland exercises mimic this position, 2) Stretching maintains flexibility for full range, 3) Overuse causes tendinopathy at insertion. Understanding this timing helps diagnose swimmer's shoulder: pain during early pull-through suggests latissimus/teres pathology versus pain during recovery implicates rotator cuff."
+            },
+            {
+                question: "In patients with bilateral trapezius palsy (as in some mitochondrial myopathies), which compensatory muscle pattern develops to allow limited shoulder elevation, and what is the long-term consequence of this adaptation?",
+                options: [
+                    "Levator scapulae hypertrophy with cervical spine lateral flexion - leads to degenerative cervical changes",
+                    "Sternocleidomastoid overuse with head tilt - causes temporomandibular joint dysfunction",
+                    "Rhomboid and serratus anterior cocontraction - results in scapular dyskinesis and impingement",
+                    "All compensatory patterns occur with varying degenerative consequences"
+                ],
+                correct: 3,
+                explanation: "Bilateral trapezius palsy leads to: 1) Levator scapulae hypertrophy (cervical arthritis), 2) SCM overuse (TMJ strain), 3) Abnormal scapulohumeral rhythm (impingement). Patients develop characteristic 'dropped shoulder' posture with forward head. Long-term: cervical spondylosis, thoracic outlet symptoms, chronic headaches. Treatment: 1) Strengthen rhomboids/serratus, 2) Shoulder supports for activities, 3) Cervical stabilization exercises, 4) Consider tendon transfers if progressive. This illustrates how trapezius is irreplaceable for normal shoulder biomechanics."
+            }
+        ];
+
+        // Initialize the quiz
+        document.addEventListener('DOMContentLoaded', function() {
+            const questionsSection = document.getElementById('questions-section');
+            const answerSection = document.getElementById('answer-section');
+            const answerBank = document.getElementById('answer-bank');
+            const submitBtn = document.getElementById('submit-btn');
+            const resetBtn = document.getElementById('reset-btn');
+            const resultsSection = document.getElementById('results-section');
+            const scoreValue = document.getElementById('score-value');
+            const attemptedValue = document.getElementById('attempted-value');
+            const passedValue = document.getElementById('passed-value');
+            const failedValue = document.getElementById('failed-value');
+            const detailedAnswers = document.getElementById('detailed-answers');
+            const shareTwitterBtn = document.getElementById('share-twitter');
+            const shareFacebookBtn = document.getElementById('share-facebook');
+            const shareWhatsappBtn = document.getElementById('share-whatsapp');
+            const shareCopyBtn = document.getElementById('share-copy');
+            const progressBar = document.getElementById('progress-bar');
+            
+            let userAnswers = Array(quizData.length).fill(null);
+            
+            // Create question elements with letters for options
+            quizData.forEach((questionData, index) => {
+                // Create question element for questions section
+                const questionElement = document.createElement('div');
+                questionElement.className = 'question';
+                questionElement.innerHTML = `
+                    <div class="question-number">${index + 1}</div>
+                    <div class="question-text">${questionData.question}</div>
+                    <div class="options">
+                        ${questionData.options.map((option, optionIndex) => `
+                            <div class="option" data-question="${index}" data-option="${optionIndex}" data-letter="${String.fromCharCode(65 + optionIndex)}">
+                                <div class="option-content">${option}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                questionsSection.appendChild(questionElement);
+                
+                // Create answer element for answer bank
+                const answerElement = document.createElement('div');
+                answerElement.className = 'answer-item';
+                answerElement.innerHTML = `
+                    <strong>${index + 1}. ${questionData.question}</strong><br>
+                    <span class="answer-correct">Correct: ${String.fromCharCode(65 + questionData.correct)}. ${questionData.options[questionData.correct]}</span>
+                `;
+                answerBank.appendChild(answerElement);
+            });
+            
+            // Update progress bar
+            function updateProgress() {
+                const answered = userAnswers.filter(answer => answer !== null).length;
+                const progress = (answered / quizData.length) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
+            
+            // Add event listeners to options
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const questionIndex = parseInt(this.getAttribute('data-question'));
+                    const optionIndex = parseInt(this.getAttribute('data-option'));
+                    
+                    // Remove selected class from all options in this question
+                    const questionOptions = document.querySelectorAll(`.option[data-question="${questionIndex}"]`);
+                    questionOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    
+                    // Store user's answer
+                    userAnswers[questionIndex] = optionIndex;
+                    
+                    // Update progress
+                    updateProgress();
+                });
+            });
+            
+            // Submit button event listener
+            submitBtn.addEventListener('click', function() {
+                let score = 0;
+                let attempted = 0;
+                let passed = 0;
+                let failed = 0;
+                
+                // Clear previous detailed answers
+                detailedAnswers.innerHTML = '';
+                
+                // Evaluate answers
+                quizData.forEach((questionData, index) => {
+                    const userAnswer = userAnswers[index];
+                    const correctAnswer = questionData.correct;
+                    const questionOptions = document.querySelectorAll(`.option[data-question="${index}"]`);
+                    
+                    if (userAnswer !== null) {
+                        attempted++;
+                        
+                        // Mark correct/incorrect answers
+                        questionOptions.forEach((option, optionIndex) => {
+                            if (optionIndex === correctAnswer) {
+                                option.classList.add('correct');
+                            } else if (optionIndex === userAnswer && userAnswer !== correctAnswer) {
+                                option.classList.add('incorrect');
+                            }
+                        });
+                        
+                        if (userAnswer === correctAnswer) {
+                            score++;
+                            passed++;
+                        } else {
+                            failed++;
+                        }
+                        
+                        // Create detailed answer element
+                        const detailedAnswer = document.createElement('div');
+                        detailedAnswer.className = 'answer-item';
+                        const userAnswerClass = userAnswer === correctAnswer ? 'answer-correct' : 'answer-incorrect';
+                        detailedAnswer.innerHTML = `
+                            <strong>${index + 1}. ${questionData.question}</strong><br>
+                            <span class="${userAnswerClass}">Your answer: ${userAnswer !== null ? String.fromCharCode(65 + userAnswer) + '. ' + questionData.options[userAnswer] : 'Not attempted'}</span><br>
+                            <span class="answer-correct">Correct: ${String.fromCharCode(65 + correctAnswer)}. ${questionData.options[correctAnswer]}</span><br>
+                            <div class="clinical-note">${questionData.explanation}</div>
+                        `;
+                        detailedAnswers.appendChild(detailedAnswer);
+                    } else {
+                        // Create detailed answer for unattempted question
+                        const detailedAnswer = document.createElement('div');
+                        detailedAnswer.className = 'answer-item';
+                        detailedAnswer.innerHTML = `
+                            <strong>${index + 1}. ${questionData.question}</strong><br>
+                            <span class="answer-incorrect">Your answer: Not attempted</span><br>
+                            <span class="answer-correct">Correct: ${String.fromCharCode(65 + correctAnswer)}. ${questionData.options[correctAnswer]}</span><br>
+                            <div class="clinical-note">${questionData.explanation}</div>
+                        `;
+                        detailedAnswers.appendChild(detailedAnswer);
+                    }
+                });
+                
+                // Update score and stats
+                scoreValue.textContent = `${score}/${quizData.length}`;
+                attemptedValue.textContent = attempted;
+                passedValue.textContent = passed;
+                failedValue.textContent = failed;
+                
+                // Show results section and answer section
+                resultsSection.style.display = 'block';
+                answerSection.classList.add('visible');
+                
+                // Scroll to results
+                resultsSection.scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Reset button event listener
+            resetBtn.addEventListener('click', function() {
+                userAnswers = Array(quizData.length).fill(null);
+                
+                // Clear all selections
+                document.querySelectorAll('.option').forEach(option => {
+                    option.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                // Hide results section and answer section
+                resultsSection.style.display = 'none';
+                answerSection.classList.remove('visible');
+                
+                // Reset progress bar
+                progressBar.style.width = '0%';
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // Share buttons functionality
+            shareTwitterBtn.addEventListener('click', function() {
+                const score = document.getElementById('score-value').textContent;
+                const text = `I scored ${score} on the Advanced Trapezius & Latissimus Dorsi Anatomy Quiz! Test your mastery.`;
+                const url = window.location.href;
+                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+            });
+            
+            shareFacebookBtn.addEventListener('click', function() {
+                const url = window.location.href;
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+            });
+            
+            shareWhatsappBtn.addEventListener('click', function() {
+                const score = document.getElementById('score-value').textContent;
+                const text = `I scored ${score} on the Advanced Trapezius & Latissimus Dorsi Anatomy Quiz! Test your mastery: ${window.location.href}`;
+                window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+            });
+            
+            shareCopyBtn.addEventListener('click', function() {
+                const score = document.getElementById('score-value').textContent;
+                const attempted = document.getElementById('attempted-value').textContent;
+                const passed = document.getElementById('passed-value').textContent;
+                const text = `Advanced Back Anatomy Quiz Results:
+Score: ${score}
+Questions Attempted: ${attempted}
+Questions Passed: ${passed}
+Test your mastery: ${window.location.href}`;
+                
+                navigator.clipboard.writeText(text).then(function() {
+                    alert('Results copied to clipboard!');
+                }, function() {
+                    alert('Failed to copy results. Please try again.');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
